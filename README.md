@@ -1,17 +1,10 @@
-<!--
-Suggested repo name: Smart-Poultry-Water-Subsystem
-GitHub "About" line: ESP32 water monitoring and dispensing subsystem for a smart poultry enclosure: load cell + HX711, relay-controlled pump, dry-run protection.
-Topics: esp32, arduino, iot, automation, hx711, load-cell, firebase, agritech, embedded-systems
-Put the six images in an /images folder in the repo.
--->
-
 # Smart Poultry Enclosure: Water Monitoring and Dispensing Subsystem
 
 An ESP32-based subsystem that keeps a poultry drinking dish supplied with water. It monitors the water level in the dish and the amount of water left in the reservoir, refills the dish automatically with a relay-controlled pump, protects the pump from running dry, and sounds an alarm when the reservoir needs refilling.
 
 This was developed as part of **Group 2's Smart Poultry Enclosure** project (Electronic Design Project 3A, EDPA301, Durban University of Technology, February to June 2026). The wider enclosure also includes feed, temperature and manual-control subsystems. **This repository covers the water monitoring and dispensing subsystem only.**
 
-![Prototype](images/prototype-photo.png)
+![Prototype](Prototype.jpeg)
 
 ## How it works
 
@@ -21,9 +14,9 @@ This was developed as part of **Group 2's Smart Poultry Enclosure** project (Ele
 - **Dry-run protection and alarm:** below 20% reservoir level the pump is disabled, the buzzer sounds, and a warning is shown on the LCD.
 - **Display and remote monitoring:** a 16 × 2 I2C LCD shows reservoir level, dish level, pump status and alarms. Level and status data are also sent to Firebase over Wi-Fi.
 
-![Block diagram](images/block-diagram.png)
+![Block diagram](Block%20diagram.drawio.png)
 
-![Control flow chart](images/flow-chart.png)
+![Control flow chart](Control%20flow%20chart.png)
 
 ## Hardware
 
@@ -40,13 +33,13 @@ This was developed as part of **Group 2's Smart Poultry Enclosure** project (Ele
 
 The pump runs from 12 V, the relay, HX711 and LCD from 5 V, and the ESP32 and water level sensor from 3.3 V, with a common ground. The reservoir is mounted on the load cell on a wooden support that lets the cell deflect freely.
 
-![Wiring](images/wiring-photo.png)
+![Wiring](Wiring.jpeg)
 
 ## Software
 
 Written in C++ using the Arduino IDE. On start-up the ESP32 initialises all peripherals, then loops: read both sensors, convert to percentages, apply the thresholds, drive the relay and buzzer, and update the LCD and Firebase.
 
-<!-- TODO: upload your .ino source file to a /src folder and link it here. -->
+<!-- TODO: upload your .ino source file and link it here. -->
 
 ## Test results
 
@@ -75,8 +68,9 @@ Load cell readings stayed within 6 g of the expected value across the 0 to 500 m
 
 **Control behaviour:** the pump started when the dish was low, stopped at the upper threshold, and was disabled when the reservoir fell below 20%. The pump responded about 1 to 2 seconds after the water level changed, which comes from sensor sampling, processing and relay switching. No false triggering was observed.
 
-![LCD showing pump ON](images/lcd-pump-on.png)
-![LCD showing low-water alert](images/lcd-low-water-alert.png)
+![LCD showing pump ON](LCD%20showing%20pump%20ON.jpeg)
+
+![LCD showing low-water alert](LCD%20showing%20low-water%20alert.jpeg)
 
 ## Challenges and fixes
 
